@@ -64,9 +64,24 @@ function getTestRunId(env = process.env) {
   debug('could not find runId.txt in folder %s', process.cwd())
 }
 
+// Allows users to set the TESTRAIL_ALLOW_CLOSING_PARTIAL_RUN
+// environment variable to allow closing a test run even with
+// untested tests. The main plugin only allows closing a testrun
+// only when all the tests within that testrun are completed (either 
+// passed or failed). Having this options gives a little flexibility
+// Where we add test cases in testrail and gradually write the corrosponding
+// Cypress tests.
+function allowClosingPartialTestRun(env = process.env) {
+  if ('TESTRAIL_ALLOW_CLOSING_PARTIAL_RUN' in env) {
+    return true;
+  }
+  return false;
+}
+
 module.exports = {
   hasConfig,
   getTestRailConfig,
   getAuthorization,
   getTestRunId,
+  allowClosingPartialTestRun
 }

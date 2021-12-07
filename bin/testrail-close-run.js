@@ -3,7 +3,7 @@
 // @ts-check
 
 const debug = require('debug')('cypress-testrail-simple')
-const { getTestRunId, getTestRailConfig } = require('../src/get-config')
+const { getTestRunId, getTestRailConfig, allowClosingPartialTestRun } = require('../src/get-config')
 const { getTestRun, closeTestRun } = require('../src/testrail-api')
 
 let runId
@@ -32,7 +32,7 @@ getTestRun(runId, testRailInfo).then((runInfo) => {
   }
 
   const allTestsDone = runInfo.untested_count === 0
-  if (!allTestsDone) {
+  if (!allTestsDone && !allowClosingPartialTestRun()) {
     console.log(
       'TestRail run %d still has %d untested cases',
       runId,
