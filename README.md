@@ -39,7 +39,13 @@ TESTRAIL_PASSWORD=
 TESTRAIL_PROJECTID=
 ```
 
-If these variables are present, we assume the user wants to use the plugin. You can disable the plugin by passing an argument
+If these variables are present, we assume the user wants to use the plugin. You can disable the plugin by passing an argument.
+
+Additionally, if you want the ability to close a testrun with untested test cases, you could set 
+```
+TESTRAIL_ALLOW_CLOSING_PARTIAL_RUN=true
+```
+This will allow the `npx testrail-close-run` command to close a testrun with untested test cases.
 
 ```js
 module.exports = (on, config) => {
