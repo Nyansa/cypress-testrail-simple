@@ -171,7 +171,7 @@ function registerPlugin(on, skipPlugin = false) {
         };
       });
       console.table(testResultTableOutput);
-      return sendTestResults(testRailInfo, runId, testRailResults)
+      return sendTestResults(testRailInfo, runId, testRailResults, screenshotPath)
     }
   })
 }
